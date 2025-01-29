@@ -1,11 +1,7 @@
-import os
-
 import socket
 from scapy.all import packet, BOOTP, DHCP
 
 from dhcp_db import DHCPData
-
-BACKEND_URL = os.getenv("BACKEND_URL")
 
 
 class DHCPServer:
@@ -14,7 +10,7 @@ class DHCPServer:
         self.bind_port = bind_port
         self.buffer_size = buffer_size
 
-        self.dhcp_data = DHCPData(BACKEND_URL)
+        self.dhcp_data = DHCPData()
 
     def get_dhcp_packet(self, data: bytes):
         return BOOTP(data)
