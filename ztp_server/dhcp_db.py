@@ -35,6 +35,7 @@ class DHCPData:
     def __init__(self):
         self.url = BACKEND_URL
         self.subnet = self.get_subnet()
+        self.router = self.get_router()
         self.min_ip_pool = self.get_min_ip_pool()
         self.max_ip_pool = self.get_max_ip_pool()
 
@@ -43,6 +44,14 @@ class DHCPData:
             # response = requests.get(self.url + "/subnet")
             # response.raise_for_status()
             return "255.255.255.0"
+        except:
+            pass
+
+    def get_router(self) -> str:
+        try:
+            # response = requests.get(self.url + "/router")
+            # response.raise_for_status()
+            return "0.0.0.0"
         except:
             pass
 
