@@ -15,7 +15,7 @@ class DHCPServer:
     def get_dhcp_packet(self, data: bytes):
         return BOOTP(data)
 
-    def get_ip_in_pool(boself, packet: packet):
+    def get_ip_in_pool(self, packet: packet):
         for option in packet["DHCP"].options:
             if option[0] == "requested_addr":
                 return option[1]
@@ -29,7 +29,7 @@ class DHCPServer:
             ("name_server", "8.8.8.8"),
             ("domain", "local"), #15
             ("static-routes", self.dhcp_data.router+":"+self.dhcp_data.subnet), #33
-            ("boot-file-name", "http:"+self.dhcp_data.url+"ztp.py"), #67
+            ("boot-file-name", "http:"+self.dhcp_data.url+"/ztp.py"), #67
             ("message-type", message_type),
             ("lease_time", 3600),
             ("server_id", self.ip_address),
