@@ -601,14 +601,6 @@ footer {
   align-items: center;
 }
 
-
-.footer {
-	background-color: var(--blue);
-	color: var(--white);
-	padding: 10px 0;
-	text-align: center;
-}
-
 .footer-container {
   display: flex;
   justify-content: space-between;
@@ -712,3 +704,111 @@ footer {
   padding: 20px;
   color: white;
 }
+
+/* Style du menu déroulant */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropbtn:hover {
+  background-color: var(--black2);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  min-width: 300px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: var(--blue);
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--gray);
+  color: var(--white);
+}
+
+/* Style global du footer */
+.footer {
+  background-color: var(--dark-blue); /* Utilisation de la couleur sombre */
+  color: var(--white); 
+  padding: 30px 0;
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-links ul, .footer-social ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links li, .footer-social li {
+  display: inline;
+}
+
+.footer-links a, .footer-social a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.footer-links a:hover, .footer-social a:hover {
+  color: var(--blue); /* Couleur de survol similaire à ton thème */
+}
+
+.footer-social .social-icon {
+  font-size: 20px;
+  display: inline-block;
+}
+
+.footer-social .social-icon:hover {
+  color: var(--blue);
+}
+
+/* Style pour la partie basse du footer */
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
