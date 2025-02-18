@@ -5,4 +5,4 @@ from ..models import Template
 class TemplateListView(View):
     def get(self, request):
         templates = Template.objects.all()
-        return render(request, "app/templates.html", {"templates": templates})
+        return render(request, "app/mesAppareils.html", {"templates": templates})
