@@ -12,8 +12,8 @@ services:
       - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-      - django-docker_media:/django-docker/media
-      - django-docker_static:/django-docker/static
+      - django-docker_media:/django-docker/media  # Volume partagé avec Django
+      - django-docker_static:/django-docker/staticfiles  # Volume partagé avec Django
     working_dir: /srv
 
   web:
@@ -29,7 +29,7 @@ services:
     volumes:
       - ".:/app"  # Monte le code source
       - "${PWD}/docker-data/sqlite:/app/db"  # Pour stocker la base SQLite
-      - "${PWD}/docker-data/STATIC:/app/static"  # Pour les fichiers statiques
+      - "django-docker_static:/app/staticfiles"  # Correspond à STATIC_ROOT dans Django
 
   dhcp:
     container_name: dhcp
@@ -51,4 +51,4 @@ volumes:
 
 networks:
   web:
-    driver : bridge
+    driver: bridge

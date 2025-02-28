@@ -1,14 +1,13 @@
-https://127.0.0.1 {
-   # Servir les fichiers statiques
-   handle_path /static/* {
-       root * /home/udach/web-ztp-git/staticfiles  # <-- Assure-toi que c'est bien le bon dossier
+http://127.0.0.1 {
+   # Servir les fichiers statiques sous app/static/
+   handle_path /app/static/* {
+       root * /django-docker/staticfiles  # Correspond à STATIC_ROOT
        file_server
-       header Content-Type "text/css"
    }
 
    # Servir les fichiers médias (uploads utilisateurs)
    handle_path /media/* {
-       root * /home/udach/web-ztp-git/media
+       root * /django-docker/media
        file_server
    }
 
