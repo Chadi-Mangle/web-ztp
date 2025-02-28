@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from ...utils import device_utils, dhcp_utils
+from app.utils import device_utils, dhcp_utils
 from dhcp_server import dhcp_server
 
 
@@ -11,4 +11,4 @@ class Command(BaseCommand):
             server = dhcp_server.DHCPServer("0.0.0.0")
             server.run()
         except Exception as e:
-            raise CommandError(e)
+            raise CommandError(e) from e

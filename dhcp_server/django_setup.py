@@ -1,3 +1,5 @@
+#### Je garde les ancien fichier au cas ou
+
 import sys
 import os
 import django

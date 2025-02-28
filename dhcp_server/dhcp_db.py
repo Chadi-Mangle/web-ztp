@@ -1,3 +1,5 @@
+#### Je garde les ancien fichier au cas ou
+
 from app.utils import device_utils, dhcp_utils
 
 
@@ -69,7 +71,7 @@ class DHCPData:
         if serial_number:
             device = device_utils.get_device_by_serial(serial_number)
             if device:
-                return device.ip
+                return device
             try:
                 return next(self.generate_ip)
             except StopIteration:

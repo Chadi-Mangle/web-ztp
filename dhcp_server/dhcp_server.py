@@ -1,8 +1,12 @@
+#### Je garde les ancien fichier au cas ou
+
 import socket
-from scapy.all import packet, BOOTP, DHCP
+
+from scapy.all import packet
+from scapy.layers.dhcp import BOOTP, DHCP
 
 from dhcp_server.dhcp_db import DHCPData
-from app.utils import device_utils
+
 
 class DHCPServer:
     def __init__(self, ip_address: str, bind_port=67, buffer_size=1024):
@@ -31,7 +35,8 @@ class DHCPServer:
         client_id = self.get_dhcp_option(packet, "client_id")
 
         if client_id:
-            serial_number = client_id.decode("utf-8")
+            client_id = client_id.decode("utf-8")
+            serial_number = "".join(c for c in client_id if c.isprintable()).strip()
             return serial_number
 
     def get_ip_in_pool(self, requested_addr, serial_number):
@@ -41,11 +46,12 @@ class DHCPServer:
         if serial_number:
             return self.dhcp_data.get_ip(serial_number)
 
+    # meme chose que get bootfile donc inutile un peu 
     def get_bootfile(self, serial_number):
         if serial_number:
-            serial_number = ''.join(c for c in serial_number if c.isprintable()).strip()
             return self.dhcp_data.get_bootfile(serial_number)
 
+    # peut etre mis autre part mais bon 
     def create_dhcp_options(self, message_type: str):
         new_options = [
             ("message-type", message_type),
@@ -69,6 +75,7 @@ class DHCPServer:
 
         return new_options
 
+    # meme chose 
     def create_bootp(self, client_ip: str, chaddr, xid, bootfile):
         return BOOTP(
             op=2,
@@ -79,30 +86,7 @@ class DHCPServer:
             file=bootfile,
         )
 
-    # def dhcp_offer(self, packet: packet):
-    #     client_ip = self.get_ip_in_pool(packet)
-
-    #     options = self.create_dhcp_options(packet, "offer")
-
-    #     bootp = self.create_bootp(packet, client_ip)
-
-    #     dhcp = DHCP(options=options)
-    #     reply = bootp / dhcp
-
-    #     return bytes(reply)
-
-    # def dhcp_ack(self, packet: packet):
-    #     client_ip = self.get_ip_in_pool(packet)
-
-    #     options = self.create_dhcp_options(packet, "ack")
-
-    #     bootp = self.create_bootp(packet, client_ip)
-
-    #     dhcp = DHCP(options=options)
-    #     reply = bootp / dhcp
-
-    #     return bytes(reply)
-
+    # meme chose genre je peux le mettre autre part mais dans tt les cas jvois pas pq j'aurais bsion de creer une reponse dhcp si je suis pas dans un serveur dhcp
     def create_dhcp_reply(self, packet: packet):
         requested_addr = self.get_dhcp_option(packet, "requested_addr")
         serial_number = self.get_serial_number(packet)
@@ -123,11 +107,6 @@ class DHCPServer:
             reply = bootp / dhcp
 
             return bytes(reply)
-
-        # if message_type == 1:
-        #     return self.dhcp_offer(packet)
-        # elif message_type == 3:
-        #     return self.dhcp_ack(packet)
 
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
