@@ -1,0 +1,24 @@
+https://127.0.0.1 {
+   # Servir les fichiers statiques
+   handle_path /static/* {
+       root * /home/udach/web-ztp-git/staticfiles  # <-- Assure-toi que c'est bien le bon dossier
+       file_server
+       header Content-Type "text/css"
+   }
+
+   # Servir les fichiers médias (uploads utilisateurs)
+   handle_path /media/* {
+       root * /home/udach/web-ztp-git/media
+       file_server
+   }
+
+   # Tout le reste passe par Django (Gunicorn)
+   handle {
+       reverse_proxy web:8000
+   }
+
+   # Activer les logs pour voir ce qui se passe
+   log {
+       output stderr
+   }
+}
