@@ -1,4 +1,4 @@
-http://127.0.0.1 {
+http://127.0.0.1/ {
    # Servir les fichiers statiques sous app/static/
    handle_path /app/static/* {
        root * /django-docker/staticfiles  # Correspond à STATIC_ROOT

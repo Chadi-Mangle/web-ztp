@@ -4,3 +4,7 @@ gunicorn
 django-crispy-forms
 crispy-bootstrap5
 django-allauth
+psycopg2-binary 
+dj-database-url
+jinja2
+whitenoise
