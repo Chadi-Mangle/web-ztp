@@ -5,3 +5,5 @@ media/*
 staticfiles
 static
 docker-data
+.env
+.env.local
