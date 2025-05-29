@@ -86,12 +86,24 @@ WSGI_APPLICATION = "webZtp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+# Détection de l'environnement (local ou production)
+ENVIRONMENT = os.getenv("DJANGO_ENV", "local")  # Par défaut, on considère que l'environnement est local
+
+# Configuration des bases de données
+if ENVIRONMENT == "production":
+    DATABASES = {
+        "default": dj_database_url.config(
+            default="postgresql://webztp_user:webztp_password@db:5432/webztp_db",
+            conn_max_age=600,
+        )
     }
-}
+else:  # Environnement local
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
