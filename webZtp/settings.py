@@ -29,6 +29,15 @@ SECRET_KEY = "django-insecure-=)14$jg2ttru(s8x5$(3+owp(y6gp-s)mx#ir-pi4dcdovgwff
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Désactiver le mode debug en production
+ENVIRONMENT = os.getenv(
+    "DJANGO_ENV", "local"
+)  # Par défaut, on considère que l'environnement est local
+if ENVIRONMENT == "production":
+    DEBUG = False
+else:
+    DEBUG = True
+
 ALLOWED_HOSTS = ["10.30.31.30", "172.16.10.30", "127.0.0.1", "pc-ztp"]
 
 # Application definition
@@ -87,7 +96,9 @@ WSGI_APPLICATION = "webZtp.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Détection de l'environnement (local ou production)
-ENVIRONMENT = os.getenv("DJANGO_ENV", "local")  # Par défaut, on considère que l'environnement est local
+ENVIRONMENT = os.getenv(
+    "DJANGO_ENV", "local"
+)  # Par défaut, on considère que l'environnement est local
 
 # Configuration des bases de données
 if ENVIRONMENT == "production":
@@ -165,8 +176,8 @@ if DEBUG:
     MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware"]
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     # Configuration pour servir les fichiers médias en développement
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -176,4 +187,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Crispy Forms configuration
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-
