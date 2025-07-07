@@ -18,6 +18,8 @@
         <link rel="prev" href="../utilisation/">
       
       
+        <link rel="next" href="../template/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
@@ -339,7 +341,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../template.md" class="md-tabs__link">
+      <a href="../template/" class="md-tabs__link">
         
   
   
@@ -632,15 +634,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#flux-de-travail-typique" class="md-nav__link">
-    <span class="md-ellipsis">
-      Flux de travail typique
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -656,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../template.md" class="md-nav__link">
+      <a href="../template/" class="md-nav__link">
         
   
   
@@ -766,15 +759,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#flux-de-travail-typique" class="md-nav__link">
-    <span class="md-ellipsis">
-      Flux de travail typique
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -798,12 +782,11 @@
 <h2 id="architecture-globale">Architecture globale<a class="headerlink" href="#architecture-globale" title="Permanent link">&para;</a></h2>
 <p>Web-ZTP est structuré autour de quatre composants principaux, chacun s'exécutant dans son propre conteneur Docker :</p>
 <ol>
-<li><strong>Application Web Django</strong> : Interface utilisateur et logique métier</li>
+<li><strong>Application WebZTP Django</strong> : Interface utilisateur et logique métier</li>
 <li><strong>Serveur DHCP dédié</strong> : Gestion des adresses IP et des options de configuration</li>
 <li><strong>Proxy Caddy</strong> : Sécurisation des communications HTTPS</li>
 <li><strong>Base de données PostgreSQL</strong> : Stockage des configurations et des données</li>
 </ol>
-<p>Cette architecture en microservices permet une grande flexibilité et facilite la maintenance.</p>
 <h2 id="composants-principaux">Composants principaux<a class="headerlink" href="#composants-principaux" title="Permanent link">&para;</a></h2>
 <h3 id="application-web">Application Web<a class="headerlink" href="#application-web" title="Permanent link">&para;</a></h3>
 <p>L'application Web Django est le cœur du système, elle gère :</p>
@@ -821,12 +804,9 @@
 <li>La redirection des appareils vers les fichiers de configuration appropriés</li>
 </ul>
 <h3 id="proxy-caddy">Proxy Caddy<a class="headerlink" href="#proxy-caddy" title="Permanent link">&para;</a></h3>
-<p>Le proxy inverse Caddy fournit :</p>
-<ul>
-<li>Support HTTPS automatique avec certificats auto-signés ou Let's Encrypt</li>
-<li>Protection contre certaines attaques web courantes</li>
-<li>Redirection du trafic vers l'application Django</li>
-</ul>
+<p>Le proxy inverse Caddy fournit :
+- Sert les fichiers statiques vers l'utilisateurs
+- Redirection du trafic vers l'application Django</p>
 <h3 id="base-de-donnees-postgresql">Base de données PostgreSQL<a class="headerlink" href="#base-de-donnees-postgresql" title="Permanent link">&para;</a></h3>
 <p>La base de données stocke :</p>
 <ul>
@@ -838,30 +818,22 @@
 <h2 id="structure-des-fichiers">Structure des fichiers<a class="headerlink" href="#structure-des-fichiers" title="Permanent link">&para;</a></h2>
 <p>Le projet est organisé de la façon suivante :</p>
 <div class="highlight"><pre><span></span><code>web-ztp/
-├── app/                      # Application Django principale
-│   ├── templates/            # Templates HTML pour l&#39;interface web
-│   ├── views/                # Vues Django (contrôleurs)
-│   ├── models.py             # Modèles de données
-│   ├── forms.py              # Formulaires web
-│   └── formset.py            # Formsets pour les formulaires complexes
-├── dhcp_server/              # Serveur DHCP personnalisé
-│   └── dhcp_server.py        # Implémentation du serveur DHCP
-├── webZtp/                   # Configuration du projet Django
-├── docker-compose.yml        # Configuration des conteneurs Docker
-├── Dockerfile                # Configuration du conteneur de l&#39;application web
-├── Dockerfile.dhcp           # Configuration du conteneur du serveur DHCP
-└── Caddyfile                 # Configuration du proxy Caddy
+├──<span class="w"> </span>.env<span class="w">                  </span><span class="c1"># Fichier d’environnement</span>
+├──<span class="w"> </span>docker-compose.yml<span class="w">    </span><span class="c1"># Lancement des conteneurs</span>
+├──<span class="w"> </span>app/
+│<span class="w">   </span>├──<span class="w"> </span>core/<span class="w">             </span><span class="c1"># Pages générales (dashboard, privacy, etc.)</span>
+│<span class="w">   </span>├──<span class="w"> </span>device/<span class="w">           </span><span class="c1"># Gestion des devices et templates</span>
+│<span class="w">   </span>├──<span class="w"> </span>dhcp_server/<span class="w">      </span><span class="c1"># Script ZTP DHCP simulé</span>
+│<span class="w">   </span>├──<span class="w"> </span>user/<span class="w">             </span><span class="c1"># Gestion des utilisateurs</span>
+│<span class="w">   </span>├──<span class="w"> </span>webZtp/<span class="w">           </span><span class="c1"># Paramètres Django (settings, urls, etc.)</span>
+│<span class="w">   </span>├──<span class="w"> </span>templates/<span class="w">        </span><span class="c1"># HTML génériques et partiels</span>
+│<span class="w">   </span>├──<span class="w"> </span>env/<span class="w">              </span><span class="c1"># Configuration Python</span>
+│<span class="w">   </span>├──<span class="w"> </span>monitoring/<span class="w">       </span><span class="c1"># Healthcheck de l’application</span>
+│<span class="w">   </span>├──<span class="w"> </span>utils/<span class="w">            </span><span class="c1"># Fonctions utilitaires (DHCP, formulaires, devices)</span>
+├──<span class="w"> </span>caddy/<span class="w">                </span><span class="c1"># Reverse proxy avec Caddy</span>
+├──<span class="w"> </span>exemple_dhcp_discover/<span class="w">   </span><span class="c1"># Script de test DHCP</span>
+├──<span class="w"> </span>exemple_ztp_config/<span class="w">      </span><span class="c1"># Script de debug ZTP</span>
 </code></pre></div>
-<h2 id="flux-de-travail-typique">Flux de travail typique<a class="headerlink" href="#flux-de-travail-typique" title="Permanent link">&para;</a></h2>
-<p>Le fonctionnement typique de Web-ZTP suit le processus suivant :</p>
-<ol>
-<li>L'administrateur crée un template de configuration via l'interface web</li>
-<li>L'administrateur enregistre un nouvel équipement avec ses paramètres spécifiques</li>
-<li>L'équipement est connecté au réseau et démarre pour la première fois</li>
-<li>Le serveur DHCP attribue une adresse IP à l'équipement et lui fournit les options ZTP</li>
-<li>L'équipement télécharge sa configuration personnalisée</li>
-<li>L'équipement applique automatiquement la configuration</li>
-</ol>
 
 
 

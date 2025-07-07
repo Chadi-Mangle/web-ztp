@@ -12,8 +12,10 @@
         <meta name="author" content="Web-ZTP Team">
       
       
-        <link rel="canonical" href="https://github.com/Chadi-Mangle/web-ztp/project_structure/">
+        <link rel="canonical" href="https://github.com/Chadi-Mangle/web-ztp/template/">
       
+      
+        <link rel="prev" href="../structure/">
       
       
       
@@ -22,7 +24,7 @@
     
     
       
-        <title>Project structure - Web-ZTP</title>
+        <title>Template - Web-ZTP</title>
       
     
     
@@ -73,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#exemple-de-template-ztp" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Project structure
+              Template
             
           </span>
         </div>
@@ -328,9 +335,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../template.md" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -524,10 +533,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../template.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Template
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -538,6 +569,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#voici-un-exemple-de-fichier-template-qui-fonctionne-avec-ce-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voici un exemple de fichier template qui fonctionne avec ce projet :
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -559,6 +619,25 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#voici-un-exemple-de-fichier-template-qui-fonctionne-avec-ce-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voici un exemple de fichier template qui fonctionne avec ce projet :
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -577,9 +656,60 @@
   
 
 
-  <h1>Project structure</h1>
+<h1 id="exemple-de-template-ztp">Exemple de template ZTP<a class="headerlink" href="#exemple-de-template-ztp" title="Permanent link">&para;</a></h1>
+<h2 id="voici-un-exemple-de-fichier-template-qui-fonctionne-avec-ce-projet">Voici un exemple de fichier template qui fonctionne avec ce projet :<a class="headerlink" href="#voici-un-exemple-de-fichier-template-qui-fonctionne-avec-ce-projet" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python2.7</span>
+<span class="c1">#</span>
+<span class="c1"># python -m py_compile sample_python_day0.py</span>
+print<span class="o">(</span><span class="s2">&quot;\n Welcome to ZTP! \n&quot;</span><span class="o">)</span>
+
+import<span class="w"> </span>sys
+
+print<span class="o">(</span><span class="s2">&quot; Python version is \n&quot;</span><span class="o">)</span>
+print<span class="o">(</span>sys.version<span class="o">)</span>
+print<span class="o">(</span><span class="s2">&quot;\n\n&quot;</span><span class="o">)</span>
+import<span class="w"> </span><span class="nb">time</span>
+
+import<span class="w"> </span>cli
+import<span class="w"> </span>traceback
+
+print<span class="o">(</span><span class="s2">&quot;\n HellO!  \n&quot;</span><span class="o">)</span>
+cli.configurep<span class="o">(</span><span class="s2">&quot;hostname JCOHOE-ZTP-DEBUG&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show inv&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show version&quot;</span><span class="o">)</span>
+
+import<span class="w"> </span>os
+
+os.system<span class="o">(</span><span class="s2">&quot;sudo ifconfig&quot;</span><span class="o">)</span>
+os.system<span class="o">(</span><span class="s2">&quot;sudo route -n&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show ip int br&quot;</span><span class="o">)</span>
+cli.executep<span class="o">(</span><span class="s2">&quot;show ip int br | i up&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show run int vlan1&quot;</span><span class="o">)</span>
+cli.executep<span class="o">(</span><span class="s2">&quot;show run int vlan4094&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show run | s iox&quot;</span><span class="o">)</span>
+cli.executep<span class="o">(</span><span class="s2">&quot;show run | s app-h&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show lic all&quot;</span><span class="o">)</span>
+
+cli.executep<span class="o">(</span><span class="s2">&quot;show run&quot;</span><span class="o">)</span>
 
 
+try:
+<span class="w">    </span>print<span class="o">(</span><span class="s2">&quot;Execute Show Version&quot;</span><span class="o">)</span>
+<span class="w">    </span>cli.executep<span class="o">(</span><span class="s2">&quot;show version&quot;</span><span class="o">)</span>
+except:
+<span class="w">    </span>print<span class="o">(</span>traceback.format_exc<span class="o">())</span>
+<span class="w">    </span>print<span class="o">(</span><span class="s2">&quot;Problem with show version CLI, cya later... \n&quot;</span><span class="o">)</span>
+
+
+print<span class="o">(</span><span class="s2">&quot;\n \n ZTP complete! \n \n&quot;</span><span class="o">)</span>
+</code></pre></div>
+<p>Dans l’interface, ce template peut être associé à un device. Une fois que le périphérique se connecte via DHCP, il recevra ce fichier en réponse.</p>
 
 
 
